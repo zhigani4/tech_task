@@ -1,0 +1,15 @@
+version: "3"
+
+services: 
+
+ app:
+     container_name: app
+     image: simply_calc:latest
+
+ tests:
+     container_name: tests
+     image: test_calc:latest
+     depends_on:
+            - app
+     command: ["pytest", "-v", "--junitxml=reports/result.xml"]
+
