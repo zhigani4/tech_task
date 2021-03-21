@@ -11,5 +11,5 @@ services:
      image: test_calc:latest
      depends_on:
             - app
-     command: ["pytest", "-v", "--junitxml=reports/result.xml"]
+     command: ["pytest", "-v"]
 
