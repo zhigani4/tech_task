@@ -10,7 +10,7 @@ pipeline {
           steps{
               script {
                   dir("${env.WORKSPACE}/03-scripts"){
-                    customImage = docker.build(run_containers:${env.BUILD_ID})
+                    customImage = docker.build(run_containers:latest)
                     customImage.inside {
                         sh 'app.py'
                     }
