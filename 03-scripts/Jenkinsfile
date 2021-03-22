@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 pipeline {
     agent any
     environment {
@@ -8,7 +10,7 @@ pipeline {
           steps{
               script {
                   dir("${env.WORKSPACE}/03-scripts"){
-                    def customImage = docker.build(run_containers:${env.BUILD_ID})
+                    customImage = docker.build(run_containers:${env.BUILD_ID})
                     customImage.inside {
                         sh 'app.py'
                     }
