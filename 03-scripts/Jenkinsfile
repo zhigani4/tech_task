@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+    environment {
+        COUNT =  "${params.COUNT_NODES}"
+    }
+    stages {
+        stage('Build images') {
+            steps{
+              echo "Parameter: ${params.COUNT_NODES}"
+              sh "docker build -t run_containers ."
+              sh "docker run -v /var/run/docker.sock:/var/run/docker.sock -e COUNT=$COUNT run_containers"
+            }      
+        }
+    }
+}
