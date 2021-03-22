@@ -7,9 +7,12 @@ pipeline {
         stage('Build images') {
             steps{
               echo "Parameter: ${params.COUNT_NODES}"
+              dir("${env.WORKSPACE}/03-scripts"){
+              sh "ls -l"
               sh "docker build -t run_containers ."
               sh "docker run -v /var/run/docker.sock:/var/run/docker.sock -e COUNT=$COUNT run_containers"
             }      
+          }
         }
     }
 }
