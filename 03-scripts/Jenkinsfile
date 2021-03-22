@@ -4,6 +4,16 @@ pipeline {
         COUNT =  "${params.COUNT_NODES}"
     }
     stages {
+        stage('Test') {
+        dir("${env.WORKSPACE}/03-scripts"){
+        def customImage = docker.build(un_containers:${env.BUILD_ID})
+
+        customImage.inside {
+            sh 'app.py'
+        }
+        }
+
+        }
         stage('Build images') {
             steps{
               echo "Parameter: ${params.COUNT_NODES}"
