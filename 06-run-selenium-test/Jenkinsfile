@@ -15,7 +15,7 @@ pipeline {
                   dir("${env.WORKSPACE}/06-run-selenium-test"){
                     sh "ls -l"
                     sh "docker build -t selenium_tests ."
-                    sh "docker run -v -e DRIVER_HOST=$DRIVER_HOST $(pwd):/selenium/reports  selenium_tests pytest -v -n $COUNT --html=reports/report.html" 
+                    sh "docker run -v -e DRIVER_HOST=$DRIVER_HOST ${env.WORKSPACE}:/selenium/reports  selenium_tests pytest -v -n $COUNT --html=reports/report.html" 
              }  
             }
           }
