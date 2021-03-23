@@ -24,7 +24,7 @@ pipeline {
               script {
                   dir("${env.WORKSPACE}/06-run-selenium-test"){
                     sh "CONTAINER_ID=\$(docker ps -a --filter 'label=vers=${env.BUILD_NUMBER}' -q)"
-                    sh "docker cp '$CONTAINER_ID:selenium/reports/report.html' ."  
+                    sh "docker cp '{$CONTAINER_ID}:selenium/reports/report.html' ."  
              }  
             }
           }
