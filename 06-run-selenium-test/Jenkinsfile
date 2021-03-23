@@ -7,13 +7,12 @@ pipeline {
         DRIVER_HOST = "${params.DRIVER_HOST}"
     }
     stages {
-       stage('Test') {
+       stage('Build and run selenium pytest') {
           steps{
               script {
                   currentBuild.displayName = "Build_Name_count_nodes_$COUNT"
                   currentBuild.description = "Build run with $COUNT threads test to $DRIVER_HOST grid."
                   dir("${env.WORKSPACE}/06-run-selenium-test"){
-                    sh "ls -l"
                     sh "docker build -t selenium_tests ."
                     sh "docker run -v -e DRIVER_HOST=$DRIVER_HOST ${env.WORKSPACE}:/selenium/reports  selenium_tests pytest -v -n $COUNT --html=reports/report.html" 
              }  
