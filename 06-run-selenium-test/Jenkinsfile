@@ -14,7 +14,7 @@ pipeline {
                   currentBuild.description = "Build run with $COUNT threads test to $DRIVER_HOST grid."
                   dir("${env.WORKSPACE}/06-run-selenium-test"){
                     sh "docker build -t selenium_tests ."
-                    sh "docker run --label vers=${env.BUILD_NUMBER} -e DRIVER_HOST=${DRIVER_HOST} -i selenium_tests pytest -v -n ${COUNT} --html=reports/report.html" 
+                    sh "docker run --label vers=${env.BUILD_NUMBER} -e DRIVER_HOST=${DRIVER_HOST} -i selenium_tests pytest -v -n ${COUNT} --html=reports/report.html || true" 
              }  
             }
           }
