@@ -10,7 +10,7 @@ pipeline {
        stage('Build and run selenium pytest') {
           steps{
               script {
-                  currentBuild.displayName = "Build_Name_count_nodes_$COUNT_$BUILD_NUMBER"
+                  currentBuild.displayName = "Build_Name_count_nodes_$COUNT_$BUILD ${env.BUILD_NUMBER}"
                   currentBuild.description = "Build run with $COUNT threads test to $DRIVER_HOST grid."
                   dir("${env.WORKSPACE}/06-run-selenium-test"){
                     sh "docker build -t selenium_tests ."
