@@ -19,7 +19,7 @@ pipeline {
             }
           }
        }
-       stage('Build and run selenium pytest') {
+       stage('Copy report from container') {
           steps{
               script {
                   dir("${env.WORKSPACE}/06-run-selenium-test"){
