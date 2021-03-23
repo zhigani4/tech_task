@@ -11,7 +11,7 @@ pipeline {
           steps{
               script {
                   currentBuild.displayName = "Build_Name_count_nodes_$COUNT"
-                  currentBuild.description = "Build run with $COUTN threads test to $DRIVER_HOST grid."
+                  currentBuild.description = "Build run with $COUNT threads test to $DRIVER_HOST grid."
                   dir("${env.WORKSPACE}/06-run-selenium-test"){
                     sh "ls -l"
                     sh "docker build -t selenium_tests ."
