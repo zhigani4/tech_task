@@ -11,4 +11,3 @@ COUNT = int(os.environ.get('COUNT'))
 for i in range(0, COUNT): 
     container = client.containers.run("alpine", detach=True )   
     print(container.id)
- 
