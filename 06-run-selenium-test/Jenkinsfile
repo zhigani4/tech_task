@@ -11,8 +11,8 @@ pipeline {
        stage('Build and run selenium pytest') {
           steps{
               script {
-                  currentBuild.displayName = "Build_Name_count_nodes $COUNT ${env.BUILD_NUMBER}"
-                  currentBuild.description = "Build run with $COUNT threads test to $DRIVER_HOST grid."
+                  currentBuild.displayName = "Build_Name_count_nodes $COUNT_NODES ${env.BUILD_NUMBER}"
+                  currentBuild.description = "Build run with $COUNT_NODES threads test to $DRIVER_HOST grid."
                   dir("${env.WORKSPACE}/06-run-selenium-test"){
                     sh "docker build -t app_docker ."
                     sh "docker run -e COUNT_NODES=${COUNT_NODES} -e COUNT_THREADS=${COUNT_THREADS} -e DRIVER_HOST=${DRIVER_HOST} -v /var/run/docker.sock:/var/run/docker.sock -ti app_docker:latest" 
