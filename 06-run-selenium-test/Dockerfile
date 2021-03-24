@@ -1,11 +1,9 @@
 FROM python:3.6-slim
 
-ARG COUNT=1 
+COPY . /06-run-selenium-tests
 
-COPY . /selenium
+WORKDIR /06-run-selenium-tests
 
-WORKDIR /selenium
+RUN pip install --no-cache-dir -r requirements.txt && chmod +x app.py
 
-RUN pip install --no-cache-dir -r requirements.txt
-
-CMD ["pytest"]
+CMD ["./app.py"]

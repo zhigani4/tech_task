@@ -3,8 +3,9 @@
 pipeline {
     agent any
     environment {
-        COUNT =  "${params.COUNT_NODES}"
-        DRIVER_HOST = "${params.DRIVER_HOST}"
+        COUNT_NODES   = "${params.COUNT_NODES}"
+        COUNT_THREADS = "${params.COUNT_THREADS}"
+        DRIVER_HOST   = "${params.DRIVER_HOST}"
     }
     stages {
        stage('Build and run selenium pytest') {
@@ -13,18 +14,9 @@ pipeline {
                   currentBuild.displayName = "Build_Name_count_nodes_$COUNT ${env.BUILD_NUMBER}"
                   currentBuild.description = "Build run with $COUNT threads test to $DRIVER_HOST grid."
                   dir("${env.WORKSPACE}/06-run-selenium-test"){
-                    sh "docker build -t selenium_tests ."
-                    sh "docker run --label vers=${env.BUILD_NUMBER} -e DRIVER_HOST=${DRIVER_HOST} -i selenium_tests pytest -v -n ${COUNT} --html=reports/report.html || true" 
-             }  
-            }
-          }
-       }
-        stage('Copy report from container') {
-          steps{
-              script {
-                  dir("${env.WORKSPACE}/06-run-selenium-test"){
-                    sh "docker cp \$(docker ps -a --filter 'label=vers=${env.BUILD_NUMBER}' -q):selenium/reports/report.html ."
-             }  
+                    sh "docker build -t app_docker ."
+                    sh "docker run -e COUNT_NODES=${COUNT_NODES} -e COUNT_THREADS=${COUNT_THREADS} -e DRIVER_HOST=${DRIVER_HOST} -v /var/run/docker.sock:/var/run/docker.sock -ti app_docker:latest" 
+               }
             }
           }
        }
