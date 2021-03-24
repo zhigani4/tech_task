@@ -23,7 +23,7 @@ pipeline {
        stage('Report send webhook') {
           steps{
               script {
-                  sh "curl -XPOST https://webhook.site/87b041d1-834d-4e38-ae21-9f8da175b475 -H 'Content-Type: application/json' -d '{ ${env.JOB_NAME} ${env.BUILD_NUMBER} SUCCESS!! }' "
+                  sh "curl -XPOST https://webhook.site/87b041d1-834d-4e38-ae21-9f8da175b475 -H 'Content-Type: application/json' -d ' ${env.JOB_NAME} build number ${env.BUILD_NUMBER} SUCCESS!! ' "
             }
           }
        }
