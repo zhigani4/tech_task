@@ -19,7 +19,7 @@ client.images.build(
     )
 
 try:
-    r = requests.get("http://" + DRIVER_HOST + ":4444/wd/hub/status", timeout=3)
+    r = requests.get("http://" + DRIVER_HOST + ":4444/wd/hub/status", timeout=60)
     r.raise_for_status()
 except requests.exceptions.HTTPError as err:
     raise SystemExit(err)
